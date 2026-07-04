@@ -1,5 +1,7 @@
 # Mandelbrot Generation Benchmark
 
+![Mandelbrot Set](assets/mandelbrot.png)
+
 ## Purpose
 
 Generate the Mandelbrot set and save it to a PNG file.
