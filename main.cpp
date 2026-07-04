@@ -1,3 +1,4 @@
+#define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "MandelbrotCPU.hpp"
 
 #include <QGuiApplication>
