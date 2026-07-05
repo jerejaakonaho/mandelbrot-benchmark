@@ -4,16 +4,23 @@ import QtQuick.Controls.Basic
 
 
 Window {
-    width: 640
-    height: 480
+    width: 1280
+    height: 720
     minimumWidth: 150
     minimumHeight: 250
     visible: true
     title: qsTr("Mandelbrot Generation Benchmark")
-    color: "#061412"
+    color: "#240C04"
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
+
+        Connections {
+            target: cpuGenerator
+            function onImageReady() {
+                cpuMandelbrot.source = "file:mandelbrot.png?id=" + Math.random();
+            }
+        }
 
         // Navbar
         Rectangle {
@@ -27,7 +34,7 @@ Window {
             Rectangle {
                 width: parent.width
                 height: 2
-                color: "#103731"
+                color: "#464243"
                 anchors.bottom: parent.bottom
             }
 
@@ -41,7 +48,7 @@ Window {
                 // Navbar text
                 Text {
                     text: "GPU vs CPU benchmark"
-                    color: "#52CBB9"
+                    color: "#E8E8E6"
                     font.pixelSize: 22
                     font.bold: true
                     Layout.alignment: Qt.AlignCenter
@@ -87,7 +94,7 @@ Window {
             Rectangle {
                 Layout.fillHeight: true
                 Layout.preferredWidth: 2
-                color: "#103731"
+                color: "#464243"
             }
 
             // CPU layout with a picture of the generated mandelbrot
@@ -101,6 +108,7 @@ Window {
                     Layout.topMargin: 20
                     text: "Start CPU Benchmark"
                     Layout.alignment: Qt.AlignCenter
+                    onClicked:  cpuGenerator.startBenchmark();
                 }
 
                 // Image of Mandelbrot

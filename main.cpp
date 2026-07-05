@@ -3,8 +3,8 @@
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 
-/*
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -16,14 +16,9 @@ int main(int argc, char *argv[])
         &app,
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
+    MandelbrotGenCPU cpuGen(-2.0, 0.47, -1.12, 1.12, 10000, 3840, 2160);
+    engine.rootContext()->setContextProperty("cpuGenerator", &cpuGen);
     engine.loadFromModule("mandelbrot", "Main");
 
     return QGuiApplication::exec();
-}
-*/
-
-int main() {
-    MandelbrotGenCPU cpuGen;
-    cpuGen.generateMandelbrot();
-    cpuGen.saveToPNG();
 }
