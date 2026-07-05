@@ -56,10 +56,15 @@ public:
             // Smooth shading if not black
             // v = n + 1 - ln(ln(sqrt(x²+y²))/ln(2)
             double v = numOfRounds + 1.0 - std::log(std::log(std::sqrt(static_cast<double>(x * x + y * y)))) / std::log(2.0);
-            double funNumber = 1.3;
-            int colorValue = static_cast<int>(255.0 * (0.5 * std::sin(funNumber * v) + 0.5));
+            double funNumber = 0.2;
+            //int colorValue = static_cast<int>(255.0 * (0.5 * std::sin(funNumber * v) + 0.5));
 
-            uint32_t smoothColor = (0xFF << 24) | (0x00 << 16) | (0x00 << 8) | colorValue;
+            uint32_t r = static_cast<int>(255.0 * (0.5 * std::sin(funNumber * v + 4.0) + 0.5));
+            uint32_t g = static_cast<int>(255.0 * (0.5 * std::sin(funNumber * v + 2.0) + 0.5));
+            uint32_t b = static_cast<int>(255.0 * (0.5 * std::sin(funNumber * v + 4.0) + 0.5));
+
+
+            uint32_t smoothColor = (0xFF << 24) | (r << 16) | (g << 8) | b;
             pixelArray[index] = smoothColor;
         }
     }
@@ -95,7 +100,7 @@ public:
 
                 int numOfRounds{};
                 
-                while (zx2 + zy2 <= 4.0 && numOfRounds < maxNumOfRounds) {
+                while (zx2 + zy2 <= 100000 && numOfRounds < maxNumOfRounds) {
                     double temp_zx = zx2 - zy2 + cx;
                     zy = 2 * zx * zy + cy;
                     zx = temp_zx;
