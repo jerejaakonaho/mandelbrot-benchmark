@@ -59,9 +59,9 @@ public:
             double funNumber = 0.2;
             //int colorValue = static_cast<int>(255.0 * (0.5 * std::sin(funNumber * v) + 0.5));
 
-            uint32_t r = static_cast<int>(255.0 * (0.5 * std::sin(funNumber * v + 4.0) + 0.5));
+            uint32_t r = static_cast<int>(255.0 * (0.5 * std::sin(funNumber * v + 2.0) + 0.5));
             uint32_t g = static_cast<int>(255.0 * (0.5 * std::sin(funNumber * v + 2.0) + 0.5));
-            uint32_t b = static_cast<int>(255.0 * (0.5 * std::sin(funNumber * v + 4.0) + 0.5));
+            uint32_t b = static_cast<int>(255.0 * (0.5 * std::sin(funNumber * v + 2.0) + 0.5));
 
 
             uint32_t smoothColor = (0xFF << 24) | (r << 16) | (g << 8) | b;
@@ -80,7 +80,7 @@ public:
         rows.resize(height);
         std::iota(rows.begin(), rows.end(), 0);
 
-        std::for_each(std::execution::par, rows.begin(), rows.end(), [&](size_t i){
+        std::for_each(std::execution::par, rows.begin(), rows.end(), [=](size_t i){
             for (size_t j{}; j < width; ++j) {
                 // The coordinate is calculated with: i * width + j
                 int index = i * width + j;
@@ -100,7 +100,7 @@ public:
 
                 int numOfRounds{};
                 
-                while (zx2 + zy2 <= 100000 && numOfRounds < maxNumOfRounds) {
+                while (zx2 + zy2 <= 4 && numOfRounds < maxNumOfRounds) {
                     double temp_zx = zx2 - zy2 + cx;
                     zy = 2 * zx * zy + cy;
                     zx = temp_zx;
